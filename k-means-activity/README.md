@@ -1,151 +1,68 @@
-## **📂 Folder Structure**  
-Each **activity** has its own folder. Inside each activity:  
-- A `/dataset/` folder contains required data.  
-- Each team member creates a **personal folder** inside the activity folder.  
+# K-Means Clustering Activity
 
-```
-/ml-courseworks
-  ├── /k-means-activity
-  │     ├── /dataset
-  │     │     ├── penguins.csv  👈 (Dataset for the activity)
-  │     ├── /your-name   👈 (Create your folder here!)
-  │     │     ├── kmeans.ipynb
-  │     │     ├── README.md
-  │     ├── README.md  👈 (Activity instructions)
-  ├── .gitignore
-```
+## Overview
 
----
+This activity involves implementing the K-Means clustering algorithm to analyze the "Penguins" dataset. The dataset contains measurements for three different species of penguins: Adelie, Chinstrap, and Gentoo. The goal is to use clustering techniques to group the penguins based on their physical characteristics.
 
-### **🔹 Step 1: Clone the Repository**  
-If this is your first time working with the repo, **clone it** to your local machine:  
-```sh
-git clone https://github.com/jvnthny-espiritu/ml-courseworks.git
-cd ml-courseworks
-```
+## Group 2
 
-### **🔹 Step 2: Create a New Branch**  
-Do not work directly on `main`. Instead, **create a new branch** with your name:  
-```sh
-git checkout -b k-means-your-name
-```
-🔹 **Replace `your-name`** with your **GitHub username or real name**.  
+### Group Members:
 
----
+| Name                        | Score |
+|-----------------------------|-------|
+| Jave Anthony Espiritu       | 100   |
+| Yuan Haley Enriquez         | 100   |
+| James Daniel Esguerra       | 100   |
+| Dale Andrew Fajardo         | 100   |
+| Marc Daniel Falic           | 100   |
+| Emmanuel Joseph Garlando    | 100   |
+| China Mae Gonzales          | 100   |
+| John Pol Jalapan            | 100   |
 
-# **📊 Dataset Preparation & Feature Selection**  
+## Dataset
 
-### **🔹 Step 3: Load the Dataset**  
-Inside your **Jupyter Notebook (`kmeans.ipynb`)**, load the dataset:  
-```python
-import pandas as pd
+The dataset includes the following columns:
+- `culmen_length_mm`: Culmen length (mm)
+- `culmen_depth_mm`: Culmen depth (mm)
+- `flipper_length_mm`: Flipper length (mm)
+- `body_mass_g`: Body mass (g)
+- `sex`: Penguin sex
 
-# Load dataset
-df = pd.read_csv("../dataset/penguins.csv")  # Adjust path if needed
+## Steps Involved
 
-# Display first few rows
-df.head()
-```
+1. **Data Cleaning**: 
+  - Handle missing values by dropping rows with missing data.
+  - Remove outliers based on specific conditions for the `flipper_length_mm` feature.
 
-### **🔹 Step 4: Clean the Dataset**  
-Check for **missing values** and remove them:  
-```python
-# Check for missing values
-print(df.isnull().sum())
+2. **Random Sampling**: 
+  - Randomly select 100 data points from the cleaned dataset to make the analysis more manageable.
 
-# Drop missing values
-df = df.dropna().reset_index(drop=True)
-```
+3. **Feature Selection**: 
+  - Select relevant numerical features for clustering: `culmen_length_mm` and `culmen_depth_mm`.
 
----
+4. **Data Standardization**: 
+  - Standardize the features using `StandardScaler` to ensure all features contribute equally to the clustering process.
 
-### **🔹 Step 5: Select Features for K-Means**  
-For clustering, we will use **three numerical features**:  
-1. **Culmen Length (`culmen_length_mm`)**  
-2. **Culmen Depth (`culmen_depth_mm`)**  
-3. **Flipper Length (`flipper_length_mm`)**  
+5. **K-Means Algorithm Implementation**:
+  - Initialize centroids by randomly selecting `k` data points.
+  - Assign each data point to the nearest centroid.
+  - Update centroids by calculating the mean of the data points assigned to each cluster.
+  - Check for convergence by comparing old and new centroids.
+  - Repeat the process until convergence or the maximum number of iterations is reached.
 
-Filter the dataset to these features:  
-```python
-selected_features = ["culmen_length_mm", "culmen_depth_mm", "flipper_length_mm"]
-df_selected = df[selected_features]
-```
+6. **Elbow Method**:
+  - Use the elbow method to determine the optimal number of clusters by plotting the within-cluster sum of squares (WCSS) for each value of `k`.
 
----
+7. **Visualization**:
+  - Visualize the changes of centroids for each iteration of the K-Means algorithm.
+  - Animate the clustering process and save the animation as a video file.
 
-### **🔹 Step 6: Select 100 Random Data Points**  
-To reduce computation, sample **100 random rows** from the dataset:  
-```python
-df_sample = df_selected.sample(n=100, random_state=42).reset_index(drop=True)
+## Findings
 
-# Display the sample dataset
-df_sample.head()
-```
+- The optimal number of clusters was determined using the elbow method. `(k = 2)`
+- The K-Means algorithm successfully grouped the penguins into clusters based on their physical characteristics.
+- The animation provided a visual representation of how the centroids and clusters evolved over iterations.
 
----
+## Conclusion
 
-# **🤖 K-Means Clustering Implementation**  
-Now, apply K-Means clustering on the **df_sample** dataset.
-
-### **🔹 Step 7: Apply K-Means Algorithm**  
-
----
-
-# **📤 Submitting Your Work for Review**  
-
-### **🔹 Step 8: Commit Your Changes**  
-Once you've completed your notebook, **stage and commit** it:  
-```sh
-git add k-means-activity/your-name/
-git commit -m "Added k-means clustering notebook"
-```
-
-### **🔹 Step 9: Push to GitHub**  
-Send your branch to GitHub:  
-```sh
-git push origin k-means-your-name
-```
-
----
-
-## **📌 Step 10: Submit a Pull Request (PR) for Review by the Team Lead**  
-1. **Go to the GitHub repository** in your browser.  
-2. Click the **Pull Requests** tab → **New Pull Request**.  
-3. Select:  
-   - **Base branch:** `main`  
-   - **Compare branch:** `k-means-your-name`  
-4. **Describe your work** (e.g., what you did, any issues, findings).  
-5. **Tag the Team Lead for review** in the PR comments.  
-6. Click **Create Pull Request** and wait for feedback.  
-
----
-
-# **📌 Step 11: Review & Merge**  
-🔹 **Only the Team Lead will approve and merge PRs.**  
-- If changes are needed, the lead will request them.  
-- To make changes, update your files and **push again**:  
-  ```sh
-  git add .
-  git commit -m "Updated notebook based on review"
-  git push origin k-means-your-name
-  ```
-- Once approved, your PR will be **merged into `main`**. 🎉  
-
----
-
-# **📌 Step 12: Sync Your Local Repo**  
-After merging, **update your local repo** before starting a new activity:  
-```sh
-git checkout main
-git pull origin main
-```
-Then, repeat the steps for the next activity! 🎯  
-
----
-
-# **📌 Reminders**  
-✅ **Follow the folder structure** – keep all files inside your personal folder.  
-✅ **Use clear commit messages** (e.g., `"Completed k-means clustering"`).  
-✅ **Request a PR review from the Team Lead before merging**.  
-✅ **Check and respond to feedback on your PR**.  
-✅ **Pull the latest changes** before working (`git pull origin main`).  
+This activity demonstrated the application of the K-Means clustering algorithm on the "Penguins" dataset. By following the steps of data cleaning, feature selection, standardization, and clustering, we were able to group the penguins into meaningful clusters. The elbow method helped in determining the optimal number of clusters, and the visualization provided insights into the clustering process.
