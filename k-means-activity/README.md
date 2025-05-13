@@ -1,6 +1,3 @@
-<<<<<<< apriori-james
-
-=======
 # K-Means Clustering Activity
 
 ## Overview
