@@ -66,5 +66,3 @@ The dataset includes the following columns:
 ## Conclusion
 
 This activity demonstrated the application of the K-Means clustering algorithm on the "Penguins" dataset. By following the steps of data cleaning, feature selection, standardization, and clustering, we were able to group the penguins into meaningful clusters. The elbow method helped in determining the optimal number of clusters, and the visualization provided insights into the clustering process.
->>>>>>> main
-
